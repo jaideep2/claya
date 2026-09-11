@@ -41,12 +41,18 @@ fn shell(app: &tauri::AppHandle) -> Result<WebviewWindow, String> {
         .ok_or_else(|| "shell window not found".to_string())
 }
 
-/// Keep the drawer flush against the canvas's right edge, same height.
+/// Keep the drawer flush against the canvas's left edge, same height.
 ///
 /// Two windows rather than two webviews is deliberate. Tauri scopes capabilities
 /// by window, so this is what keeps `save_module` and the API key out of reach of
 /// model-authored code. Multi-webview would allow a single window, but it is still
 /// behind the `unstable` flag with open positioning and resize bugs.
+///
+/// Still required even though the shell declares `"parent": "canvas"`. That makes
+/// the drawer a macOS child window — which is what keeps the pair together in
+/// Mission Control and raises them as a unit — but a child window follows its
+/// parent's *position* only. It does not track the parent's height, and it knows
+/// nothing about the collapsed rail width, so both are set here.
 fn dock_drawer(app: &tauri::AppHandle) -> Result<(), String> {
     let canvas = canvas(app)?;
     let drawer = shell(app)?;

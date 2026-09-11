@@ -101,21 +101,34 @@ attorney's if the brand starts carrying real commercial weight.
 
 ## crates.io
 
-`claya` is free. Same norms as npm: no reserving, no placeholders — claim it when
-the Tauri binary crate is ready. Publishing gets `docs.rs/claya` automatically.
-2FA on.
+**Claimed — `claya` 0.0.1, published 2026-09-11.** The crate is the stub in
+`crates/claya`: a doc comment, a `HOMEPAGE` const, and a README saying what Claya
+is and why there is no API yet. crates.io never deletes a crate, so that single
+publish holds the name permanently — no renewal, nothing to maintain.
+
+The app binary in `src-tauri` shares the name `claya`, so it carries
+`publish = false`. That guard is the only thing standing between a stray
+`cargo publish` and the whole app source being on crates.io forever. Do not
+remove it.
+
+If a reusable piece is ever extracted — the versioned module store in `db.rs` is
+the obvious candidate — it replaces the stub at a real version. `docs.rs/claya`
+builds automatically from whatever is published.
 
 ## GitHub
 
-`github.com/claya` is taken. Available: **`clayahq`** (the pick), `claya-dev`,
-`clayaapp`.
+**Decided: no organisation.** Ships from `github.com/jaideep2/claya`, the
+personal account, and stays there. `github.com/claya` was taken anyway, and an org
+adds a layer this project does not need.
 
-Shipping continues from the existing personal repo for now; GitHub issues
-permanent redirects on a transfer, so clone URLs and docs links keep resolving if
-it later moves to an org. **Reserve the org name anyway** — repo paths survive a
-move, org names do not survive someone else taking them, and it is free.
+The cost of that decision, so it is not a surprise later: `clayahq` and the other
+org names are not reserved, so someone else can take them. Moving to an org later
+is still possible — GitHub issues permanent redirects on a repo transfer, so clone
+URLs and docs links keep resolving — but the preferred name may be gone by then.
+Accepted.
 
-The tap must live at `<owner>/homebrew-claya`, so `brew tap <owner>/claya`.
+The Homebrew tap follows the owner: `jaideep2/homebrew-claya`, tapped as
+`brew tap jaideep2/claya`.
 
 ## Distribution
 
@@ -167,10 +180,13 @@ any username we could claim.
 
 ## Order
 
-1. The rename (`02-milestones.md`) — before anything ships.
-2. Reserve the `clayahq` org name.
+Done: the rename, `claya.app` + `claya.dev`, the GitHub repo, crates.io.
+
+Remaining:
+
+1. Generate the updater keypair and back it up offline — the last M7 item, and
+   the only one that cannot be recovered from.
+2. npm — claim `claya` and `@claya`; deprecate `@aleup/*` (never unpublish:
+   `~/Documents/legalytiai` still consumes those packages).
 3. Turn on auto-renew for `claya.app` and `claya.dev`.
-4. Generate the updater keypair and back it up offline. (Apple: done.)
-5. npm — claim `claya` and `@claya`; deprecate `@aleup/*`.
-6. crates.io when the crate is ready.
-7. Social, at announcement.
+4. Social, at announcement.

@@ -64,7 +64,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJGM0EzN0Y4MkRGNzExMDMKUldRREVmY3QrRGM2di9nNXJ0dTVpVW90aXdvMG1idjI0eGltUFJOZHpYbDhvVkttbjd3Qyt6U0cK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ0Q0JGNUEyMjdEMUM5OUYKUldTZnlkRW5vdlhMUk5GZit2S2NSQm5qTDBudzF0Q3k3bzFQVmhBci96QU9xTWtsckU5cFdlK1kK",
       "endpoints": [
         "https://updates.claya.app/{{target}}/{{arch}}/{{current_version}}"
       ]
