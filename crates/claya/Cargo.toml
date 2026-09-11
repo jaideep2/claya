@@ -1,0 +1,14 @@
+[package]
+name = "claya"
+version = "0.0.1"
+edition = "2021"
+description = "Name placeholder for Claya, a macOS app that rewrites its own interface from a chat prompt."
+license = "Apache-2.0"
+repository = "https://github.com/jaideep2/claya"
+homepage = "https://claya.app"
+documentation = "https://claya.dev"
+readme = "README.md"
+keywords = ["tauri", "macos", "codegen", "self-modifying"]
+categories = ["development-tools", "gui"]
+
+[dependencies]

@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "A self-modifying Tauri app"
 edition = "2021"
 rust-version = "1.77.2"
+# The published `claya` crate is the stub in ../crates/claya. This is the app
+# binary and shares its name, so block it from ever being published by accident.
+publish = false
 
 [lib]
 name = "claya_lib"
