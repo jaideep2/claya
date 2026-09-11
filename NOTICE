@@ -1,0 +1,23 @@
+Claya
+Copyright 2026 Jaideep Singh
+
+This product includes software developed as part of the Claya project
+(https://github.com/jaideep2/claya).
+
+Licensed under the Apache License, Version 2.0. See LICENSE for the full
+text.
+
+Claya bundles third-party components under their own licences, all of them
+permissive (MIT, or MIT/Apache-2.0 dual). A generated inventory ships with
+each release as THIRD-PARTY-LICENSES; the principal ones are:
+
+  React, React DOM                MIT
+  Radix Themes                    MIT
+  Sucrase                         MIT
+  Tauri, Tauri plugins            MIT OR Apache-2.0
+  rusqlite, reqwest, keyring      MIT / MIT OR Apache-2.0
+
+"Claya" and the Claya logo are trademarks and are NOT licensed under the
+Apache License. Section 6 of that licence grants no trademark rights. Forks
+and derivative works are welcome under the licence, but must not use the
+Claya name or mark in a way that suggests endorsement or origin.

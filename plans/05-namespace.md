@@ -137,7 +137,8 @@ requirements a new project will not meet; the tap is the path until it does.
 ## Email
 
 Cloudflare Email Routing is free. With no `.com`, it goes on `claya.app`:
-`hello@` and — given the app runs model-authored code — `security@`, before
+`info@` — used for general contact and, since it is published in
+`SECURITY.md`, for vulnerability reports too. Set it up before
 publishing `SECURITY.md`.
 
 ## Social
