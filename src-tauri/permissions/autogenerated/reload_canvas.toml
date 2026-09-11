@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-reload-canvas"
+description = "Enables the reload_canvas command without any pre-configured scope."
+commands.allow = ["reload_canvas"]
+
+[[permission]]
+identifier = "deny-reload-canvas"
+description = "Denies the reload_canvas command without any pre-configured scope."
+commands.deny = ["reload_canvas"]

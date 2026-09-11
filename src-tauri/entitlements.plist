@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Outbound HTTPS to the Anthropic API. -->
+  <key>com.apple.security.network.client</key>
+  <true/>
+
+  <!-- The app compiles model-authored TSX at runtime and evaluates it with
+       `new Function`. That runs inside WKWebView's own content process, which
+       carries its own entitlements, so the app should NOT need allow-jit or
+       allow-unsigned-executable-memory. Verified against a hardened-runtime
+       build — see `scripts/release.sh`. Do not add JIT entitlements
+       speculatively; each one widens the attack surface of a process that is
+       deliberately executing generated code. -->
+
+  <!-- App Sandbox is intentionally NOT enabled. It is not required outside the
+       Mac App Store, and would need extra entitlements for Keychain access. -->
+</dict>
+</plist>

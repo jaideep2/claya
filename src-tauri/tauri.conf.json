@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Claya",
+  "version": "0.1.0",
+  "identifier": "com.claya.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "canvas",
+        "title": "Claya",
+        "url": "canvas.html",
+        "width": 720,
+        "height": 760,
+        "x": 560,
+        "y": 100,
+        "backgroundThrottling": "disabled"
+      },
+      {
+        "label": "shell",
+        "title": "Chat",
+        "url": "index.html",
+        "width": 380,
+        "height": 760,
+        "x": 168,
+        "y": 100,
+        "backgroundThrottling": "disabled",
+        "decorations": false,
+        "resizable": false,
+        "skipTaskbar": true,
+        "transparent": true,
+        "shadow": false,
+        "parent": "canvas"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+    },
+    "macOSPrivateApi": true
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app"
+    ],
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.icns"
+    ],
+    "category": "DeveloperTool",
+    "copyright": "",
+    "shortDescription": "An app that rewrites its own interface from a chat prompt.",
+    "macOS": {
+      "minimumSystemVersion": "13.0",
+      "entitlements": "entitlements.plist"
+    },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJGM0EzN0Y4MkRGNzExMDMKUldRREVmY3QrRGM2di9nNXJ0dTVpVW90aXdvMG1idjI0eGltUFJOZHpYbDhvVkttbjd3Qyt6U0cK",
+      "endpoints": [
+        "https://updates.claya.app/{{target}}/{{arch}}/{{current_version}}"
+      ]
+    }
+  }
+}

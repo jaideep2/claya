@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-probe-canvas"
+description = "Enables the probe_canvas command without any pre-configured scope."
+commands.allow = ["probe_canvas"]
+
+[[permission]]
+identifier = "deny-probe-canvas"
+description = "Denies the probe_canvas command without any pre-configured scope."
+commands.deny = ["probe_canvas"]

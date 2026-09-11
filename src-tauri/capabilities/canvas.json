@@ -1,0 +1,16 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "canvas-capability",
+  "description": "Runs model-authored code. May read its own source, declare the data shape it owns, and read/write app state \u2014 nothing else. Notably absent: save_module, set_active_version, list_versions.",
+  "windows": [
+    "canvas"
+  ],
+  "permissions": [
+    "core:window:allow-set-title",
+    "allow-load-active-module",
+    "allow-kv-get",
+    "allow-kv-set",
+    "allow-declare-schema",
+    "allow-get-theme"
+  ]
+}

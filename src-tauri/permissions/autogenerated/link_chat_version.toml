@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-link-chat-version"
+description = "Enables the link_chat_version command without any pre-configured scope."
+commands.allow = ["link_chat_version"]
+
+[[permission]]
+identifier = "deny-link-chat-version"
+description = "Denies the link_chat_version command without any pre-configured scope."
+commands.deny = ["link_chat_version"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-load-active-module"
+description = "Enables the load_active_module command without any pre-configured scope."
+commands.allow = ["load_active_module"]
+
+[[permission]]
+identifier = "deny-load-active-module"
+description = "Denies the load_active_module command without any pre-configured scope."
+commands.deny = ["load_active_module"]

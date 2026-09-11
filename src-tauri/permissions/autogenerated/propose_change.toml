@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-propose-change"
+description = "Enables the propose_change command without any pre-configured scope."
+commands.allow = ["propose_change"]
+
+[[permission]]
+identifier = "deny-propose-change"
+description = "Denies the propose_change command without any pre-configured scope."
+commands.deny = ["propose_change"]

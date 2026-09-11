@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-reset-to-version"
+description = "Enables the reset_to_version command without any pre-configured scope."
+commands.allow = ["reset_to_version"]
+
+[[permission]]
+identifier = "deny-reset-to-version"
+description = "Denies the reset_to_version command without any pre-configured scope."
+commands.deny = ["reset_to_version"]

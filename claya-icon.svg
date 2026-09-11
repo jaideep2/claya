@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0"    stop-color="#F0AC8B"/>
+      <stop offset="0.45" stop-color="#CE7551"/>
+      <stop offset="1"    stop-color="#8E442A"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#FFFFFF" stop-opacity="0.30"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="1"   stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#bg)"/>
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#sheen)"/>
+
+  <!-- A thumbprint pressed into clay. Oval rather than circular, and the ring gaps
+       are scattered to three different sides: aligned gaps read as a wifi symbol. -->
+  <g fill="none" stroke="#FFF4E6" stroke-width="44" stroke-linecap="round">
+    <ellipse cx="512" cy="520" rx="32" ry="40" fill="#FFF4E6" stroke="none"/>
+    <path d="M 412.5 533.2 A 100 126 0 1 1 491.2 643.2"/>
+    <path d="M 665.3 423.8 A 172 212 0 1 1 515.0 308.0"/>
+    <path d="M 607.3 792.5 A 244 296 0 1 1 753.0 566.3"/>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background: Canvas;
+  color: CanvasText;
+}
+.app { max-width: 520px; margin: 0 auto; padding: 32px 24px; }
+.app header { display: flex; align-items: baseline; justify-content: space-between; }
+.app h1 { font-size: 22px; margin: 0 0 16px; }
+.count { opacity: .5; font-size: 12px; }
+.composer { display: flex; gap: 8px; margin-bottom: 16px; }
+.composer input { flex: 1; padding: 8px 10px; border: 1px solid color-mix(in srgb, CanvasText 20%, transparent); border-radius: 6px; background: Canvas; color: CanvasText; }
+.composer button, .remove { border: 1px solid color-mix(in srgb, CanvasText 20%, transparent); background: transparent; color: CanvasText; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, CanvasText 8%, transparent); }
+.list li.done .title { opacity: .4; text-decoration: line-through; }
+.list .title { flex: 1; }
+.list .empty { opacity: .4; justify-content: center; }
+.remove { padding: 2px 8px; opacity: .5; }
+.failure { padding: 24px; font-family: ui-monospace, SFMono-Regular, monospace; }
+.failure h2 { font-size: 14px; color: #d33; margin: 0 0 12px; }
+.failure pre { white-space: pre-wrap; font-size: 12px; background: color-mix(in srgb, CanvasText 6%, transparent); padding: 12px; border-radius: 6px; }
+.failure p { font-size: 12px; opacity: .6; }

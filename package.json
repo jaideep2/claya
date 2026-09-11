@@ -1,0 +1,35 @@
+{
+  "name": "claya",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "PATH=\"$HOME/.cargo/bin:$PATH\" tauri",
+    "test:loader": "esbuild src/canvas/loader.ts --bundle --format=esm --platform=node --external:sucrase --outfile=.loader-build/loader.mjs --log-level=error && node test/loader.test.mjs",
+    "test": "npm run test:loader && npm run test:templates && npm run test:rust",
+    "test:rust": "PATH=\"$HOME/.cargo/bin:$PATH\" cargo test --manifest-path src-tauri/Cargo.toml",
+    "test:all": "npm run test && npm run test:e2e",
+    "test:e2e": "PATH=\"$HOME/.cargo/bin:$PATH\" node scripts/e2e.mjs",
+    "test:templates": "esbuild src/canvas/loader.ts --bundle --format=esm --platform=node --external:sucrase --outfile=.loader-build/loader.mjs --log-level=error && node test/templates.test.mjs"
+  },
+  "dependencies": {
+    "@radix-ui/themes": "^3.3.0",
+    "@tauri-apps/api": "^2.11.1",
+    "@tauri-apps/plugin-updater": "^2.11.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sucrase": "^3.35.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.7.0",
+    "vite": "^8.2.2"
+  }
+}

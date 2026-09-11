@@ -1,0 +1,42 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "shell-capability",
+  "description": "Privileged, hand-written window. Owns the model loop, the module store, and the disk.",
+  "windows": [
+    "shell"
+  ],
+  "permissions": [
+    "core:default",
+    "allow-load-active-module",
+    "allow-save-module",
+    "allow-list-versions",
+    "allow-load-version",
+    "allow-set-active-version",
+    "allow-kv-get",
+    "allow-set-api-key",
+    "allow-clear-api-key",
+    "allow-api-key-status",
+    "allow-chat-history",
+    "allow-link-chat-version",
+    "allow-propose-change",
+    "allow-probe-canvas",
+    "allow-reload-canvas",
+    "allow-apply-and-verify",
+    "allow-get-model",
+    "allow-set-model",
+    "allow-list-snapshots",
+    "allow-restore-snapshot",
+    "allow-schema-status",
+    "allow-toggle-drawer",
+    "core:event:default",
+    "allow-build-identity",
+    "allow-check-for-update",
+    "allow-install-update",
+    "updater:default",
+    "allow-list-templates",
+    "allow-apply-template",
+    "allow-get-theme",
+    "allow-set-theme",
+    "allow-reset-to-version"
+  ]
+}

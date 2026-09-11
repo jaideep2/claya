@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-kv-set"
+description = "Enables the kv_set command without any pre-configured scope."
+commands.allow = ["kv_set"]
+
+[[permission]]
+identifier = "deny-kv-set"
+description = "Denies the kv_set command without any pre-configured scope."
+commands.deny = ["kv_set"]

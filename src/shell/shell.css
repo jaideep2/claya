@@ -1,0 +1,233 @@
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+
+/* Transparent window: the rounded card below is the only painted surface, so the
+   corners outside its radius stay see-through. */
+body {
+  margin: 0;
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background: transparent;
+  color: CanvasText;
+}
+
+/* The drawer does NOT scroll as a whole. It is a fixed-height column: status and
+   panels take what they need, the transcript takes the rest and scrolls inside
+   itself. Scrolling the whole column is what starved the chat before. */
+.shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  /* Flex distributes while the content fits — the chat takes the slack and the
+     transcript scrolls inside itself. When it genuinely does not fit (fresh
+     install: key gate AND picker AND chat all at once) the whole card scrolls
+     rather than clipping a panel mid-row. */
+  overflow-y: auto;
+  background: Canvas;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  box-shadow: 0 8px 28px rgb(0 0 0 / .18);
+  transition: transform .18s cubic-bezier(.32, .72, 0, 1), opacity .18s ease;
+}
+
+/* ------------------------------------------------------------------ rail */
+.rail {
+  height: 100vh; width: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between; padding: 10px 0;
+  background: Canvas; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  box-shadow: 0 8px 28px rgb(0 0 0 / .18);
+}
+.rail .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.rail .dot.good { color: #2a9d4a; }
+.rail .dot.bad { color: #d33; }
+
+.shell header {
+  flex: 0 0 auto;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+}
+.shell header h1 { font-size: 15px; margin: 0; }
+.shell header p { margin: 1px 0 0; opacity: .45; font-size: 11px; }
+.collapse {
+  border: none; background: none; font-size: 20px; line-height: 1; opacity: .35;
+  padding: 0 4px; cursor: pointer; margin-top: -2px;
+}
+.collapse:hover { opacity: .8; }
+
+/* ---------------------------------------------------------------- status */
+.status { flex: 0 0 auto; display: flex; flex-direction: column; gap: 7px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip {
+  font-size: 10.5px; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+  background: color-mix(in srgb, CanvasText 8%, transparent);
+}
+.chip.good { background: color-mix(in srgb, #2a9d4a 18%, transparent); color: #218a3d; }
+.chip.bad  { background: color-mix(in srgb, #d33 18%, transparent); color: #c22; }
+.controls { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.controls select {
+  background: Canvas; color: CanvasText; font: inherit; font-size: 11px;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  border-radius: 5px; padding: 2px 4px;
+}
+.flash {
+  font-size: 11px; margin: 0; padding: 7px 9px; border-radius: 6px; line-height: 1.5;
+  background: color-mix(in srgb, #4a90d9 14%, transparent);
+}
+.err {
+  white-space: pre-wrap; margin: 0; padding: 8px; border-radius: 6px;
+  font: 11px/1.4 ui-monospace, SFMono-Regular, monospace;
+  background: color-mix(in srgb, #d33 10%, transparent);
+  max-height: 90px; overflow: auto;
+}
+
+/* ------------------------------------------------------------- key gate */
+.keygate {
+  flex: 0 0 auto; padding: 11px; border-radius: 8px;
+  border: 1px solid color-mix(in srgb, #e8a 40%, transparent);
+}
+.keygate label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; opacity: .55; }
+.keygate .actions { display: flex; gap: 6px; margin-top: 6px; }
+.keygate .note { font-size: 10.5px; opacity: .5; margin: 4px 0 0; line-height: 1.45; }
+.keygate input {
+  flex: 1; padding: 6px 8px; border-radius: 6px; font: inherit;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  background: Canvas; color: CanvasText;
+}
+
+/* ----------------------------------------------------------------- chat */
+/* min-height:0 is load-bearing: without it a flex child refuses to shrink below
+   its content and the transcript pushes the panels off the bottom. */
+/* A floor, not zero. On a fresh install the key gate and the template picker are
+   both showing, and without this the transcript collapses past the composer,
+   which then overlaps the panels below it. */
+.chat { flex: 1 1 auto; min-height: 152px; display: flex; flex-direction: column; gap: 8px; }
+.transcript {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 7px; padding: 2px;
+}
+.transcript .empty { opacity: .45; font-size: 12px; text-align: center; margin: auto 12px; line-height: 1.6; }
+.msg {
+  padding: 7px 10px; border-radius: 9px; font-size: 12px; max-width: 88%;
+  display: flex; gap: 8px; align-items: baseline;
+}
+.msg.user { align-self: flex-end; background: color-mix(in srgb, CanvasText 10%, transparent); }
+.msg.assistant { align-self: flex-start; background: color-mix(in srgb, #4a90d9 16%, transparent); }
+.msg.pending { opacity: .5; }
+/* A gate rollback is something that happened TO the app, not something the model
+   said. Muted and clamped tighter so a stack trace cannot own the transcript. */
+.msg.system {
+  align-self: stretch; max-width: 100%;
+  background: color-mix(in srgb, CanvasText 5%, transparent);
+  font: 10.5px/1.45 ui-monospace, SFMono-Regular, monospace;
+  opacity: .62; padding: 5px 8px; border-radius: 6px;
+}
+.msg.system span { -webkit-line-clamp: 2; }
+.msg .badge { font-style: normal; font-size: 10px; opacity: .8; }
+/* Clamp long bubbles — a Sucrase parse failure carries a full stack trace. */
+.msg span {
+  overflow-wrap: anywhere;
+  display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+}
+.composer { flex: 0 0 auto; display: flex; gap: 6px; align-items: flex-end; }
+.composer textarea {
+  flex: 1; height: 56px; resize: none; padding: 8px; border-radius: 7px; font: inherit;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  background: Canvas; color: CanvasText;
+}
+
+/* --------------------------------------------------------------- panels */
+/* Capped so opening one can never swallow the chat; scrolls within itself. */
+.panels {
+  /* Shrinks before the chat does — the summaries stay reachable by scrolling,
+     whereas a squeezed composer is unusable. */
+  flex: 0 1 auto; min-height: 0; max-height: 38vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2px;
+  border-top: 1px solid color-mix(in srgb, CanvasText 10%, transparent);
+  padding-top: 8px;
+}
+/* An explicit disclosure chevron. The native marker is invisible against these
+   small uppercase summaries, so nothing signalled that a row could open. */
+.panels summary {
+  font-size: 10.5px; opacity: .55; cursor: pointer; padding: 3px 0;
+  text-transform: uppercase; letter-spacing: .06em;
+  list-style: none; display: flex; align-items: center; gap: 6px;
+}
+.panels summary::-webkit-details-marker { display: none; }
+.panels summary::before {
+  content: "›";
+  display: inline-block; font-size: 13px; line-height: 1; opacity: .8;
+  transition: transform .15s ease; transform: rotate(0deg);
+}
+.panels details[open] > summary::before { transform: rotate(90deg); }
+.panels summary:hover { opacity: .85; }
+.panels details[open] summary { opacity: .85; }
+.panels ul { list-style: none; margin: 5px 0 9px; padding: 0; }
+.panels li {
+  display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 11.5px;
+  border-bottom: 1px solid color-mix(in srgb, CanvasText 7%, transparent);
+}
+.panels .note { font-size: 11px; opacity: .5; margin: 4px 0 0; line-height: 1.5; }
+.panels .v { width: 32px; opacity: .6; font-family: ui-monospace, monospace; flex: 0 0 auto; }
+.panels .note-col { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.versions li.active { font-weight: 600; }
+.versions li.failed { opacity: .42; }
+.versions li.failed .x { color: #d33; }
+.sourceview pre {
+  max-height: 200px; overflow: auto; margin: 5px 0 9px;
+  font: 10px/1.5 ui-monospace, SFMono-Regular, monospace;
+  background: color-mix(in srgb, CanvasText 5%, transparent);
+  padding: 9px; border-radius: 6px;
+}
+
+/* --------------------------------------------------------------- shared */
+button {
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  background: transparent; color: CanvasText; border-radius: 6px;
+  padding: 5px 11px; cursor: pointer; font-size: 12px; white-space: nowrap;
+}
+button:hover:not(:disabled) { background: color-mix(in srgb, CanvasText 6%, transparent); }
+button:disabled { opacity: .4; cursor: default; }
+button.inline { padding: 2px 8px; font-size: 11px; }
+button.inline.good { border-color: #2a9d4a; color: #2a9d4a; }
+button.danger { border-color: #d33; color: #d33; }
+.panels button { padding: 2px 8px; font-size: 11px; }
+.badge {
+  font-size: 10px; padding: 2px 7px; border-radius: 999px;
+  background: color-mix(in srgb, #2a9d4a 20%, transparent); color: #2a9d4a;
+}
+.dim { opacity: .5; }
+.good { color: #2a9d4a; }
+.bad { color: #d33; }
+code { font: 11px ui-monospace, monospace; background: color-mix(in srgb, CanvasText 8%, transparent); padding: 1px 4px; border-radius: 3px; }
+
+/* ------------------------------------------------------------- templates */
+.picker { flex: 0 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.picker label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; opacity: .55; }
+.picker .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.picker .tpl {
+  display: flex; flex-direction: column; gap: 2px; align-items: flex-start;
+  text-align: left; padding: 8px 9px; border-radius: 8px; white-space: normal;
+}
+.picker .tpl b { font-size: 12px; }
+.picker .tpl span { font-size: 10px; opacity: .55; line-height: 1.35; }
+.templates li b { font-weight: 600; }
+
+.panel-actions {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin: 6px 0 2px; font-size: 11px;
+}
+.panel-actions label { display: flex; align-items: center; gap: 5px; opacity: .6; cursor: pointer; }
+.panel-actions .confirm { display: flex; gap: 5px; }
+
+.theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 8px 0 10px; }
+.theme-grid label { display: flex; flex-direction: column; gap: 3px; font-size: 10px; opacity: .55; text-transform: uppercase; letter-spacing: .05em; }
+.theme-grid select {
+  font: inherit; font-size: 11px; padding: 3px 4px; border-radius: 5px; text-transform: none;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  background: Canvas; color: CanvasText; opacity: 1;
+}
+
+.row-actions { display: flex; gap: 4px; align-items: center; flex: 0 0 auto; }
+.versions li { gap: 6px; }
+.versions .note-col { min-width: 0; }
